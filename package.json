@@ -4,18 +4,36 @@
   "scripts": {
     "dev": "vite",
     "serve": "vite preview",
-    "build": "./script/build.sh"
+    "build": "INLINE_RUNTIME_CHUNK=false tsc && vite build",
+    "lint:fix": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path ./.gitignore",
+    "lint:format": "prettier  --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" ",
+    "lint": "yarn lint:format && yarn lint:fix "
   },
   "dependencies": {
     "react": "^17.0.0",
     "react-dom": "^17.0.0"
   },
   "devDependencies": {
+    "@types/chrome": "^0.0.164",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.5.0",
+    "@typescript-eslint/parser": "^5.5.0",
     "@vitejs/plugin-react": "^1.0.0",
+    "eslint": "^8.3.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.27.1",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "path": "^0.12.7",
+    "pre-commit": "^1.2.2",
+    "prettier": "^2.5.0",
     "typescript": "^4.3.2",
     "vite": "^2.6.4"
   },
+  "pre-commit": "lint",
   "license": "MIT"
 }
