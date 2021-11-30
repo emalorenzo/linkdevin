@@ -1,23 +1,29 @@
-
 {
   "short_name": "LinkDevIn",
   "name": "LinkedIn message automator",
   "version": "1.0.0",
-  "manifest_version": 2,
-  "permissions": [
-    "storage",
-    "tabs",
-    "activeTab",
-    "http://*/*", 
-    "https://*/*"
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "./static/js/background.js"
+  },
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "Open the popup"
+  },
+  "permissions": ["activeTab"],
+  "content_scripts": [
+    {
+      "matches": ["https://*.linkedin.com/*"],
+      "js": ["./static/js/content.js"]
+    }
   ],
-  "browser_action": {
-    "default_popup": "popup.html",
-    "default_icon": {
-      "16": "/images/get_started16.png",
-      "32": "/images/get_started32.png",
-      "48": "/images/get_started48.png",
-      "128": "/images/get_started128.png" 
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+K",
+        "mac": "MacCtrl+Shift+K"
+      },
+      "description": "Opens index.html"
     }
   },
   "icons": {
@@ -25,6 +31,5 @@
     "32": "/images/get_started32.png",
     "48": "/images/get_started48.png",
     "128": "/images/get_started128.png"
-  },
-  "content_security_policy": "script-src 'self' 'sha256-fdAfMKZtCTRPKMRznGwonJHC++vCCrQS7XFnVrzSXAE=' 'sha256-YD8w9VLrdvqI5/tFVmpT+1337ly+e/JvPrkRxYZo/w4='; object-src 'self';"
+  }
 }
