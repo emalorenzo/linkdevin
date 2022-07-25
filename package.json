@@ -5,9 +5,10 @@
     "dev": "vite",
     "serve": "vite preview",
     "build": "INLINE_RUNTIME_CHUNK=false tsc && vite build",
-    "lint:fix": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path ./.gitignore",
     "lint:format": "prettier  --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" ",
-    "lint": "yarn lint:format && yarn lint:fix "
+    "lint:css": "stylelint --ignore-path .gitignore --fix \"**/*.css\"",
+    "lint:fix": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path ./.gitignore",
+    "lint": "yarn lint:format && yarn lint:fix && yarn lint:css"
   },
   "dependencies": {
     "react": "^17.0.0",
@@ -31,6 +32,9 @@
     "path": "^0.12.7",
     "pre-commit": "^1.2.2",
     "prettier": "^2.5.0",
+    "stylelint": "^14.1.0",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-standard": "^24.0.0",
     "typescript": "^4.3.2",
     "vite": "^2.6.4"
   },

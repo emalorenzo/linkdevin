@@ -3,11 +3,11 @@ import "./App.css";
 import { useEffect, useState } from "react";
 
 // import logo from "./logo.svg";
-import { DOMMessage, DOMMessageResponse } from "./types";
+import { DOMMessage, Message } from "./types";
 
 function App() {
   const [tab, setTab] = useState<chrome.tabs.Tab | null>(null);
-  const [response, setResponse] = useState<DOMMessageResponse | null>(null);
+  const [messages, setMessages] = useState<Message[] | null>(null);
 
   useEffect(() => {
     const getTab = async () => {
@@ -22,7 +22,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    window.console.log("");
     if (tab) {
       chrome.tabs.sendMessage(
         // Current tab ID
@@ -32,9 +31,9 @@ function App() {
         { type: "GET_DOM" } as DOMMessage,
 
         // Callback executed when the content script sends a response
-        (response: DOMMessageResponse) => {
-          setResponse(response);
-          console.log("frula", response);
+        (messages: Message[]) => {
+          // setMessages(messages);
+          console.log("volvio", messages);
         }
       );
     }
@@ -43,8 +42,13 @@ function App() {
   return (
     <div className="container">
       <p>Mensajes pendientes de responder</p>
-      <pre>{JSON.stringify(tab, null, 2)}</pre>
-      <pre>{JSON.stringify(response, null, 2)}</pre>
+      {messages && messages.length > 0 && (
+        <div>
+          {messages.map((message, i) => (
+            <pre key={i}>{message.name}</pre>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

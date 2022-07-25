@@ -8,9 +8,10 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        main: resolve(__dirname, "index.html"),
-        content: resolve(__dirname, "src/chromeServices/DOMEvaluator.ts"),
-        background: resolve(__dirname, "src/background.ts"),
+        popup: resolve(__dirname, "popup.html"),
+        options: resolve(__dirname, "options.html"),
+        content: resolve(__dirname, "content.ts"),
+        background: resolve(__dirname, "background.ts"),
       },
       output: {
         entryFileNames: "static/js/[name].js",

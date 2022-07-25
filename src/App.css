@@ -1,3 +1,6 @@
 .container {
   padding: 2rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
 }
